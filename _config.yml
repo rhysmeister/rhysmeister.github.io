@@ -1,0 +1,13 @@
+title: Rhys Campbell
+description: >- # this means to ignore newlines until "baseurl:"
+  This is the personal technical blog of Rhys Campbell
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "http://www.youdidwhatwithtsql.com" # the base hostname & protocol for your site, e.g. http://example.com
+github_username:  rhysmeister
+
+# Build settings
+theme: minima
+plugins:
+  - jekyll-feed
+show_excerpts: true
+permalink: /:title
