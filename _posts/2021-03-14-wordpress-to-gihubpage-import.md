@@ -46,4 +46,4 @@ when 'text'
   ReverseMarkdown.cleaner.remove_leading_newlines(node.text.gsub("\n", '<br>').strip.gsub('<br>', "\n"))
 {% endhighlight %}
 
-into the following file ***/Library/Ruby/Gems/2.6.0/gems/reverse_markdown-2.0.0/lib/reverse_markdown/converters/pre.rb***. Rerunning the conversion process showed the problem had been resolved.
+into the following file ***/Library/Ruby/Gems/2.6.0/gems/reverse_markdown-2.0.0/lib/reverse_markdown/converters/pre.rb*** at the appropriate line. Rerunning the conversion process showed the problem had been resolved.
