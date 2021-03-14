@@ -10,7 +10,7 @@ I've just completed the migration of a Wordpress blog to GitHub pages using the 
 
 [Migrating from Wordpress to GitHub Pages](https://guillermo-roman.com/migrating-wordpress-blog-to-github-pages/)
 
-But there were a couple of small changes I need to make to get this fully working for me. The code to convert the Wordpress xml export the markdown format contains a minor error...
+But there were a couple of small changes I need to make to get this fully working for me. The code to convert the Wordpress xml export to html contains a minor error...
 
 {% highlight ruby %}
 ruby -rubygems -e 'require "jekyll-import";
@@ -38,7 +38,7 @@ ruby -r rubygems -e 'require "jekyll-import";
     })'
 {% endhighlight %}
 
-After this I could convert all my posts to html format. Then I could run the `ruby ./wordpress-html-to-md.rb "_posts"` command to convert all of the posts to markdown. This worked but I spotted a formatting problem. All of my code snippets were on a single line. Something was stripping all the line endings from my code examples. I tracked this down to the reverse_markdown (2.0.0) library used by the conversion process. This problem has already [been fixed](https://github.com/shivabhusal/reverse_markdown/commit/63b5019ffad14a0875a3ece58e10d38c5881597b) with the addition of three lines of code. This wasn't availabe to me via gem install so I just pasted the following lines of code:
+After this I could convert all my posts to html format. Then I could run the `ruby ./wordpress-html-to-md.rb "_posts"` command to convert all of the posts to markdown. This worked but I spotted a formatting problem. All of my code snippets were on a single line. Something was stripping all the line endings from my code examples. I tracked this down to the reverse_markdown (2.0.0) library used by the conversion process. This problem has already [been fixed](https://github.com/shivabhusal/reverse_markdown/commit/63b5019ffad14a0875a3ece58e10d38c5881597b) with the addition of three lines of code. This wasn't available to me via gem install so I just pasted the following lines of code:
 
 {% highlight ruby %}
 when 'text'
