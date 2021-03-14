@@ -30,7 +30,7 @@ Sometimes I want to run the same cronjob on a few hosts but I might want to offs
 - name: Ensure cron exists
   cron:
     name: Test Job
-    minute: "{{{{ play_hosts.index(inventory_hostname) }}}}-59/5"
+    minute: {% raw %}"{{ play_hosts.index(inventory_hostname) }}-59/5"{% raw %}
     job: /usr/local/bin/myscript.sh >> /var/log/log.log
     user: web
 {% endhighlight %}
