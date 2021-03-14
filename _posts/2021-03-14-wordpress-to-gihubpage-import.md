@@ -8,7 +8,7 @@ categories:
 ---
 I've just completed the migration of a Wordpress blog to GitHub pages using the Ruby based [Jekyll](https://jekyllrb.com/) blogging engine. The following resource was very useful...
 
-[Migrating from Wordpress to GitHUb Pages](https://guillermo-roman.com/migrating-wordpress-blog-to-github-pages/)
+[Migrating from Wordpress to GitHub Pages](https://guillermo-roman.com/migrating-wordpress-blog-to-github-pages/)
 
 But there were a couple of small changes I need to make to get this fully working for me. The code to convert the Wordpress xml export the markdown format contains a minor error...
 
