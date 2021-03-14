@@ -26,14 +26,14 @@ permalink: "/offset-cron-jobs-with-ansible/2414/"
 ---
 Sometimes I want to run the same cronjob on a few hosts but I might want to offset them slightly if I'm accessing any shared resources. Here's an easy way to do that, for a small number of hosts, using [Ansible](https://www.ansible.com/)...
 
-```
+{% highlight yaml %}
 - name: Ensure cron exists
   cron:
     name: Test Job
     minute: "{{ play_hosts.index(inventory_hostname) }}-59/5"
     job: /usr/local/bin/myscript.sh >> /var/log/log.log
     user: web
-```
+{% endhighlight %}
 
 This would create a job, every 5 minutes, with a one minute offset compared to the previous host. So assuming four hosts we'd end up with the following cron job schedules;
 
