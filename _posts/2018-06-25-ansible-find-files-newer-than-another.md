@@ -27,7 +27,8 @@ permalink: "/ansible-find-files-newer-than-another/2384/"
 ---
 <p>I needed to figure out a way of identifying files newer than another one in <a href="https://www.ansible.com/" target="_blank" rel="noopener">Ansible</a>. Here's an outline of the solution I came up with.</p>
 <p>First we need to create a bunch of directories and folder, with modified mtime values, that we can work with.</p>
-<pre lang="Bash">mkdir dir1;
+{% highlight bash %}
+mkdir dir1;
 mkdir dir2;
 # Set the time on this dir to 3 days ago
 touch -t $(date -v-3d +'%Y%m%d%H%M') dir1;
@@ -41,7 +42,8 @@ touch -t $(date -v-3d +'%Y%m%d%H%M') dir2/file5.txt;
 touch -t $(date -v-2d +'%Y%m%d%H%M') dir2/file6.txt;
 touch -t $(date -v-1d +'%Y%m%d%H%M') dir2/file7.txt;
 touch dir2/file8.txt;
-</pre>
+{% endhighlight %}
+
 <p>Let's check the mtime value on our files...</p>
 <pre lang="Bash">stat -x dir2/*.txt | egrep 'File:|Modify:'
 </pre>
@@ -77,7 +79,7 @@ Modify: Mon Jun 25 13:29:33 2018
         failed_when: snapshot_stat.stat.exists == False 
 
       - set_fact: 
-          myage={{ ansible_date_time.epoch|int - snapshot_stat.stat.mtime|int}} 
+          myage: {{ ansible_date_time.epoch|int - snapshot_stat.stat.mtime|int}} 
 
       - debug: 
           msg: "{{ myage }}" 
