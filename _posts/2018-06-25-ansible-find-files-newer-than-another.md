@@ -63,8 +63,37 @@ Modify: Sun Jun 24 13:29:00 2018
 Modify: Mon Jun 25 13:29:33 2018
 </pre>
 <p>If we want to return files in dir2 than are newer than dir1, which has an mtime of Fri Jun 22 13:29:00 2018, then we would expect to return file6.txt, file7.txt and file8.txt. Here's the playbook that will do just that;</p>
-<pre lang="yaml">---
-- hosts: localhost become: no tasks: - name: Get the mtime of the snapshot for later use stat: path: dir1/ register: snapshot\_stat failed\_when: snapshot\_stat.stat.exists == False - set\_fact: myage={{ ansible\_date\_time.epoch|int - snapshot\_stat.stat.mtime|int}} - debug: msg: "{{ myage }}" - name: Find files newer than the snapshot\_dir mtime find: paths: dir2/ age: "-{{ myage }}" age\_stamp: mtime file\_type: file register: found\_files - debug: var: found\_files
+{% highlight yaml %}
+{% raw %}
+---
+  - hosts: localhost 
+    become: no 
+    tasks: 
+    
+      - name: Get the mtime of the snapshot for later use 
+        stat: 
+          path: dir1/ 
+        register: snapshot_stat 
+        failed_when: snapshot_stat.stat.exists == False 
+
+      - set_fact: 
+          myage={{ ansible_date_time.epoch|int - snapshot_stat.stat.mtime|int}} 
+
+      - debug: 
+          msg: "{{ myage }}" 
+
+      - name: Find files newer than the snapshot_dir mtime 
+        find: 
+          paths: dir2/ 
+          age: "-{{ myage }}" 
+          age_stamp: mtime 
+          file_type: file 
+        register: found_files 
+
+     - debug: 
+         var: found_files
+{% endraw %}
+{% endhighlight %}
 
 Not the myage variable above has a minus in front of it. This is makes it return files newer than this 'age'. The documentation page for the [find module](https://docs.ansible.com/ansible/devel/modules/find_module.html) described the age parameter as follows;
 
