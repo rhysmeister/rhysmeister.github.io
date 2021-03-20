@@ -37,23 +37,27 @@ These tasks are repeated n number of times as specified by the user. This playbo
 
 The first is a method to dynamically generate a list to iterate over. This is how we control the number of times we restart the service.
 
-```
+{% highlight yaml %}
+{% raw %}
 - name: Generate a list we will iterate over
     set_fact:
       restart_iterations: "{{ restart_iterations | default([]) + [item | int] }}"
     with_sequence: start=1 end="{{ max_iterations }}"
     run_once: yes
-```
+{% endraw %}
+{% endhighlight %}
 
 The second uses the [loop](https://docs.ansible.com/ansible/latest/user_guide/playbooks_loops.html#loop-control) construct. The **current\_iteration** variable is made available in the **tasks.yml** file
 
-```
+{% highlight yaml %}
+{% raw %}
 - name: Run main tasks file
     include_tasks: tasks.yml
     loop: "{{ restart_iterations }}"
     loop_control:
       loop_var: current_iteration
-```
+{% endraw %}
+{% endhighlight %}
 
 The playbook can optionally produce a log to make it a little easier to see what nodes it's executing on...
 
@@ -73,9 +77,11 @@ tail -f /tmp/service_restarter.log
 
 Here's how you might execute the playbook...
 
-```
+{% highlight bash %}
+{% raw %}
 ansible-playbook -l cassandra -i inventory service_restarter.yml
-```
+{% endraw %}
+{% endhighlight %}
 
 The playbook is available over on my [github/ServiceRestarter](https://github.com/rhysmeister/ServiceRestarter).
 
