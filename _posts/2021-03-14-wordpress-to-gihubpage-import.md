@@ -10,7 +10,7 @@ I've just completed the migration of a Wordpress blog to GitHub pages using the 
 
 [Migrating from Wordpress to GitHub Pages](https://guillermo-roman.com/migrating-wordpress-blog-to-github-pages/)
 
-But there were a couple of small changes I need to make to get this fully working for me. The code to convert the Wordpress xml export to html contains a minor error...
+But there were a couple of small changes I needed to make to get this fully working for me. The code to convert the Wordpress xml export to html contains a minor error...
 
 {% highlight ruby %}
 ruby -rubygems -e 'require "jekyll-import";
