@@ -30,22 +30,26 @@ This is possible using a combination of the [pids](https://docs.ansible.com/ansi
 
 First get the pids of your process...
 
-```
+{% highlight yaml %}
+{% raw %}
 - name: Getting pids for mongod
   pids:
       name: mongod
   register: pids_of_mongod
-```
+{% endraw %}
+{% endhighlight %}
 
 The pids module returns a list with which we can iterate over with [with\_items](https://docs.ansible.com/ansible/latest/user_guide/playbooks_loops.html).Then we can use the [wait\_for](https://docs.ansible.com/ansible/latest/modules/wait_for_module.html) task and the [/proc filesystem](http://www.tldp.org/LDP/Linux-Filesystem-Hierarchy/html/proc.html) to ensure all the processes have exited...
 
-```
+{% highlight yaml %}
+{% raw %}
 - name: Wait for all mongod processes to exit
   wait_for:
     path: "/proc/{{ item }}/status"
     state: absent
   with_items: "{{ pids_of_mongod.pids }}"
-```
+{% endraw %}
+{% endhighlight %}
 
 After this last task complete you can be sure that the Linux OS has cleaned up all your processes.
 
