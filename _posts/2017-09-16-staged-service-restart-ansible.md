@@ -75,14 +75,16 @@ When I manually started the service it would join the cluster with no issues. Th
 
 I found some discussion of the issue, on the [ansible github](https://github.com/ansible/ansible/issues/12170), and adapted a workaround to include a sleep between each cassandra service start.
 
-```
+{% highlight yaml %}
+{% raw %}
 - name: Staged Cassandra Service Start
     run_once: true
     with_items: "{{ play_hosts }}"
     delegate_to: "{{ item }}"
     shell: "sleep 60 && /usr/sbin/service cassandra start"
     when: deploy_mode == True
-```
+{% endraw %}
+{% endhighlight %}
 
 This makes clever use of the [delegate\_to](http://docs.ansible.com/ansible/latest/playbooks_delegation.html#delegation) to execute a sleep and service restart on each host. This staged execution of the cassandra service start allowed all nodes to join the ring successfully.
 
