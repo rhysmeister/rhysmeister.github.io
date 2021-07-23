@@ -27,9 +27,28 @@ author:
 permalink: "/check-mariadb-replication-status-ansible/2303/"
 ---
 <p>I needed a method to check replication status inside <a href="https://www.ansible.com/" target="_blank">Ansible</a>. The method I came up with uses the <a href="http://docs.ansible.com/ansible/shell_module.html" target="_blank">shell module</a>...</p>
-<pre lang="yaml">
+
+{% highlight yaml %}
+{% raw %}
 ---
-- hosts: mariadb vars\_prompt: - name: "mariadb\_user" prompt: "Enter MariaDB user" - name: "mariadb\_password" prompt: "Enter MariaDB user password" tasks: - name: "Check MariaDB replication state" shell: "test 2 -eq $(mysql -u '{{ mariadb\_user }}' -p'{{ mariadb\_password }}' -e 'SHOW SLAVE STATUS' --auto-vertical-output | grep -E 'Slave\_IO\_Running|Slave\_SQL\_Running' | grep Yes | wc -l)" register: replication\_status - name: "Print replication status var" debug: var: replication\_status
+- hosts: mariadb
+  vars_prompt:
+      - name: "mariadb_user"
+        prompt: "Enter MariaDB user"
+      - name: "mariadb_password"
+        prompt: "Enter MariaDB user password"
+
+      tasks:
+
+        - name: "Check MariaDB replication state"
+          shell: "test 2 -eq $(mysql -u '{{ mariadb_user }}' -p'{{ mariadb_password }}' -e 'SHOW SLAVE STATUS' --auto-vertical-output | grep -E 'Slave_IO_Running|Slave_SQL_Running' | grep Yes | wc -l)"
+          register: replication_status
+
+        - name: "Print replication status var"
+          debug:
+            var: replication_status
+{% endraw %}
+{% endhighlight %}
 
 This is executed like so...
 
@@ -120,4 +139,3 @@ slave2 : ok=3 changed=1 unreachable=0 failed=0
 ```
 
 **N.B.** There is the [mysql\_replication Ansible module](http://docs.ansible.com/ansible/mysql_replication_module.html) that some may prefer to use but it requires the MySQLdb Python package to be present on the remote host.
-

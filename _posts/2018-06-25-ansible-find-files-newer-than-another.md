@@ -28,6 +28,7 @@ permalink: "/ansible-find-files-newer-than-another/2384/"
 <p>I needed to figure out a way of identifying files newer than another one in <a href="https://www.ansible.com/" target="_blank" rel="noopener">Ansible</a>. Here's an outline of the solution I came up with.</p>
 <p>First we need to create a bunch of directories and folder, with modified mtime values, that we can work with.</p>
 {% highlight bash %}
+{% raw %}
 mkdir dir1;
 mkdir dir2;
 # Set the time on this dir to 3 days ago
@@ -42,6 +43,7 @@ touch -t $(date -v-3d +'%Y%m%d%H%M') dir2/file5.txt;
 touch -t $(date -v-2d +'%Y%m%d%H%M') dir2/file6.txt;
 touch -t $(date -v-1d +'%Y%m%d%H%M') dir2/file7.txt;
 touch dir2/file8.txt;
+{% endraw %}
 {% endhighlight %}
 
 <p>Let's check the mtime value on our files...</p>
@@ -68,31 +70,31 @@ Modify: Mon Jun 25 13:29:33 2018
 {% highlight yaml %}
 {% raw %}
 ---
-  - hosts: localhost 
-    become: no 
-    tasks: 
-    
-      - name: Get the mtime of the snapshot for later use 
-        stat: 
-          path: dir1/ 
-        register: snapshot_stat 
-        failed_when: snapshot_stat.stat.exists == False 
+  - hosts: localhost
+    become: no
+    tasks:
 
-      - set_fact: 
-          myage: {{ ansible_date_time.epoch|int - snapshot_stat.stat.mtime|int}} 
+      - name: Get the mtime of the snapshot for later use
+        stat:
+          path: dir1/
+        register: snapshot_stat
+        failed_when: snapshot_stat.stat.exists == False
 
-      - debug: 
-          msg: "{{ myage }}" 
+      - set_fact:
+          myage: {{ ansible_date_time.epoch|int - snapshot_stat.stat.mtime|int}}
 
-      - name: Find files newer than the snapshot_dir mtime 
-        find: 
-          paths: dir2/ 
-          age: "-{{ myage }}" 
-          age_stamp: mtime 
-          file_type: file 
-        register: found_files 
+      - debug:
+          msg: "{{ myage }}"
 
-     - debug: 
+      - name: Find files newer than the snapshot_dir mtime
+        find:
+          paths: dir2/
+          age: "-{{ myage }}"
+          age_stamp: mtime
+          file_type: file
+        register: found_files
+
+     - debug:
          var: found_files
 {% endraw %}
 {% endhighlight %}
@@ -102,4 +104,3 @@ Not the myage variable above has a minus in front of it. This is makes it return
 "Select files whose age is equal to or greater than the specified time. Use a negative age to find files equal to or less than the specified time. You can choose seconds, minutes, hours, days, or weeks by specifying the first letter of any of those words (e.g., "1w")."
 
 I found this explanation to be a little confusing with the mixed up semantics between age and time. Basically specifying a value of '1d' would return all files older than 1 day, while '-1d' would return all files less than a day old.
-
