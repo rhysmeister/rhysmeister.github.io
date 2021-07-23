@@ -4,7 +4,6 @@ title: FizzBuzz with Python
 date: 2021-07-23 18:00:00.000000000 +01:00
 type: post
 published: true
-password: ''
 status: publish
 categories:
 - Python
