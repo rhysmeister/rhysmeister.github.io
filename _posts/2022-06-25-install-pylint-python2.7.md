@@ -12,7 +12,7 @@ tags:
   - pylint
   - python
 ---
-When installing [pylint](https://pypi.org/project/pylint/) with Python 2.7 you may encounter the following error...
+When installing [pylint](https://pypi.org/project/pylint/) with Python 2.7 you may encounter the following problem...
 
 ```
 Collecting pylint
@@ -26,7 +26,7 @@ You are using pip version 8.1.2, however version 22.1.2 is available.
 You should consider upgrading via the 'pip install --upgrade pip' command.
 ```
 
-Python 2.7 is no longer supported by newer versions of PyLint (from V2) and its dependancies. If you're not in the position to update Python then the following fix should work...
+Note the packagae name of "unknown" in the output. Python 2.7 is no longer supported by newer versions of PyLint (from V2) and its dependencies. If you're not in the position to update Python then the following fix should work...
 
 ```
 pip install 'pylint==1.9.*' 'configparser==4.0.*' 'isort==4.3.*' 'lazy-object-proxy==1.6.*'
