@@ -28,7 +28,6 @@ terraform version
 ```
 
 * Further useful links
-
-** [HashiCorp Response to CircleCI](https://support.hashicorp.com/hc/en-us/articles/13177506317203)
-** [Stack Overflow - Terraform will damage your Computer](https://stackoverflow.com/questions/76129509/terraform-will-damage-your-computer-on-macos-intel)
-** [Terraform will damage your Computer](https://www.storagetutorials.com/solved-terraform-will-damage-your-computer/)
+  * [HashiCorp Response to CircleCI](https://support.hashicorp.com/hc/en-us/articles/13177506317203)
+  * [Stack Overflow - Terraform will damage your Computer](https://stackoverflow.com/questions/76129509/terraform-will-damage-your-computer-on-macos-intel)
+  * [Terraform will damage your Computer](https://www.storagetutorials.com/solved-terraform-will-damage-your-computer/)
