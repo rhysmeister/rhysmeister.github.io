@@ -24,4 +24,4 @@ Re-enable again with:
 semodule --build
 ```
 
-For more consult the [semodule man page](https://www.linux.org/docs/man8/semodule.html)
+For more consult the [semodule man page](https://www.linux.org/docs/man8/semodule.html) and [Possible Causes of Silent Denials](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/security-enhanced_linux/sect-security-enhanced_linux-fixing_problems-possible_causes_of_silent_denials)
