@@ -12,9 +12,9 @@ tags:
   - terraform
   - rds
 ---
-For a monitoring project I'm currently working on I need to get the amount of RAM an [RDS](https://aws.amazon.com/rds/) Instance has. Unfortunately the [aws_db_instance](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance) resource doesn't expose this type of information to us. Terraform does however give us an [external datasource](https://registry.terraform.io/providers/hashicorp/external/latest/docs/data-sources/external) that we can take advantage of to provide the data I need.
+For a monitoring project I'm currently working on I need to get the amount of RAM an [RDS](https://aws.amazon.com/rds/) Instance has. Unfortunately the [aws_db_instance](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance) resource doesn't expose this type of information to us. Terraform does however give us an [external datasource](https://registry.terraform.io/providers/hashicorp/external/latest/docs/data-sources/external) that we can take advantage of to provide the data.
 
-First we need to write a wrapper script around an [aws ec2](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/ec2/index.html) command. We use the [describe-instance-types](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/ec2/describe-instance-types.html) sub-command to get the amount of RAM an instance has. This instance type inforamtion, as far as I know, is still relevant to RDS Instance, so it's safe to use for this purpose. I'm also using the [jq](https://github.com/jqlang/jq) command on the final line to return the data in a form Terraform can handle...
+First we need to write a wrapper script around an [aws ec2](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/ec2/index.html) command. We use the [describe-instance-types](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/ec2/describe-instance-types.html) sub-command to get the amount of RAM an instance has. This instance type information, as far as I know, is still relevant to RDS Instance, so it's safe to use for this purpose. I'm also using the [jq](https://github.com/jqlang/jq) command on the final line to return the data in a form Terraform can handle...
 
 ```bash
 #!/bin/bash
@@ -44,7 +44,7 @@ data "external" "rds" {
 }
 ````
 
-We're setting the instance_type variable using a few Terraform functions. Basically this turn `db.t3.micro`into `t3.micro`. This is the format that the aws cli tool in the wrapper script requires. Also note the use of `depends_on` as the RDS Instance needs to exist before the datasource is run.
+We're setting the instance_type variable using a few Terraform functions. Basically this turn `db.t3.micro` into `t3.micro`. This is the format that the aws cli tool in the wrapper script requires. Also note the use of `depends_on` as the RDS Instance needs to exist before the datasource is run.
 
 With all that in place we can then reference the RAM value like so...
 
@@ -58,4 +58,4 @@ There's a working demo over at [github/rhysmeister](https://github.com/rhysmeist
 
 After performing a `terraform apply` you'll see the output variable is set to the instance type's RAM in MB. In this case the RDS instance is a db.t3.micro and it has 1024MB of RAM.
 
-![Terraform RDS Instance RAM Output](terraform-rds-ram-output.png)
+![Terraform RDS Instance RAM Output](assets/2024/03/terraform-rds-ram-output.png)
