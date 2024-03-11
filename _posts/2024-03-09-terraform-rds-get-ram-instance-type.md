@@ -44,7 +44,7 @@ data "external" "rds" {
 }
 ````
 
-We're setting the instance_type variable using a few Terraform functions. Basically this turn `db.t3.micro` into `t3.micro`. This is the format that the aws cli tool in the wrapper script requires. Also note the use of `depends_on` as the RDS Instance needs to exist before the datasource is run.
+We're setting the instance_type variable using a few Terraform functions. Basically this turns `db.t3.micro` into `t3.micro`. This is the format that the aws cli tool in the wrapper script requires. Also note the use of `depends_on` as the RDS Instance needs to exist before the datasource is run.
 
 With all that in place we can then reference the RAM value like so...
 
