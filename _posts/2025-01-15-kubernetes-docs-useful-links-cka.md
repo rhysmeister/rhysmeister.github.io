@@ -13,7 +13,7 @@ tags:
   - cka
 ---
 
-For the [CKA Exam](https://training.linuxfoundation.org/certification/certified-kubernetes-administrator-cka/) it's useful to know the documentation well, and to be able to navigate quickly to appropriate code snippets, command and the like. I present here a short list of links that may be useful, in the exam, for specific question categories.
+For the [CKA Exam](https://training.linuxfoundation.org/certification/certified-kubernetes-administrator-cka/) it's useful to know the documentation well, and to be able to navigate quickly to appropriate code snippets, commands and the like. I present here a short list of links that may be useful, in the exam, for specific question categories.
 
 * [Bootstrapping clusters with kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/)
 * [Upgrading kubeadm clusters](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/)
