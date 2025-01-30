@@ -41,3 +41,5 @@ For the [CKA Exam](https://training.linuxfoundation.org/certification/certified-
   * [How to issue a certificate for a user](https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/#normal-user)
 
 Found a pretty [Comprehensive CKA Bookmark List](https://github.com/datmt/CKA-Examples/blob/master/resources/bookmark.html) during my googling.
+
+[CKA Exam Study Guide](https://devopscube.com/cka-exam-study-guide/) _ Up to date guide with lots of useful links.
