@@ -17,7 +17,7 @@ tags:
 | Alias   Example | Description |
 |--------|---------|---------|-------------|
 | `k=kubectl` | - | Pre-configured alias for kubectl |
-| `do="--dry-run=client -o yaml"` | `k create deploy nginx --image=nginx $do` | Generate YAML for deployment without applying it |
-| `now="--force --grace-period 0"` | `k delete pod x $now` | Force delete a pod immediately |
+| `export do="--dry-run=client -o yaml"` | `k create deploy nginx --image=nginx $do` | Generate YAML for deployment without applying it |
+| `export now="--force --grace-period 0"` | `k delete pod x $now` | Force delete a pod immediately |
 
 These shortcuts can help speed up command execution during the CKA exam.
