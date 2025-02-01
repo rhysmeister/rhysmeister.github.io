@@ -13,10 +13,11 @@ tags:
   - cka
 ---
 
+Run these commands in your shell to make them available to you...
 
-| Alias   Example | Description |
+| Command   Example | Description |
 |--------|---------|---------|-------------|
-| `k=kubectl` | - | Pre-configured alias for kubectl |
+| `alias k=kubectl` | - | Create an alias for kubectl |
 | `export do="--dry-run=client -o yaml"` | `k create deploy nginx --image=nginx $do` | Generate YAML for deployment without applying it |
 | `export now="--force --grace-period 0"` | `k delete pod x $now` | Force delete a pod immediately |
 
