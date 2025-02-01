@@ -13,7 +13,7 @@ tags:
   - cka
 ---
 
-Run these commands in your shell to make them available to you...
+Run these commands in your shell to make them available (or put in [.bashrc](https://www.digitalocean.com/community/tutorials/bashrc-file-in-linux))...
 
 | Command   Example | Description |
 |--------|---------|---------|-------------|
